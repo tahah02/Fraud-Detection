@@ -16,7 +16,7 @@ def calculate_last_6_month_avg(df: pd.DataFrame) -> pd.DataFrame:
     if 'transaction_date' in df.columns:
         df['transaction_date'] = pd.to_datetime(df['transaction_date'])
     
-    df = df.groupby('user_id', group_keys=False).apply(rolling_avg)
+    df = df.groupby('user_id', group_keys=False).apply(rolling_avg, include_groups=False)
     df['Last_6_Month_Avg'] = df['Last_6_Month_Avg'].fillna(df['transaction_amount'])
     
     return df
@@ -51,7 +51,7 @@ def calculate_rolling_std(df: pd.DataFrame, window: int = 30) -> pd.DataFrame:
         ).std()
         return group
     
-    df = df.groupby('user_id', group_keys=False).apply(rolling_std)
+    df = df.groupby('user_id', group_keys=False).apply(rolling_std, include_groups=False)
     df['Rolling_Std'] = df['Rolling_Std'].fillna(0)
     
     return df
@@ -66,7 +66,7 @@ def calculate_transaction_velocity(df: pd.DataFrame) -> pd.DataFrame:
         group['Transaction_Velocity'] = 1 / (group['time_diff'] + 1)
         return group
     
-    df = df.groupby('user_id', group_keys=False).apply(calc_velocity)
+    df = df.groupby('user_id', group_keys=False).apply(calc_velocity, include_groups=False)
     df['Transaction_Velocity'] = df['Transaction_Velocity'].fillna(0)
     df = df.drop('time_diff', axis=1, errors='ignore')
     

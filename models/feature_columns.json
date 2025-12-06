@@ -1,0 +1,1 @@
+["transaction_amount", "balance_before", "balance_after", "Last_6_Month_Avg", "Current_Month_Cumulative_Sum", "Deviation_From_Avg", "Deviation_Ratio", "Rolling_Std", "Transaction_Velocity", "Merchant_Risk_Score", "Amount_Normalized", "Amount_To_Balance_Ratio", "Amount_To_Max_Ratio", "Hour", "DayOfWeek", "IsWeekend", "IsNightTime", "Channel_Encoded", "Merchant_Encoded"]

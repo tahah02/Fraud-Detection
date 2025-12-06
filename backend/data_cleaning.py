@@ -17,13 +17,22 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def fix_missing_values(df: pd.DataFrame) -> pd.DataFrame:
+    df['transaction_amount'] = pd.to_numeric(df['transaction_amount'], errors='coerce')
+    df['balance_before'] = pd.to_numeric(df['balance_before'], errors='coerce')
+    df['balance_after'] = pd.to_numeric(df['balance_after'], errors='coerce')
+    
     df['transaction_amount'] = df['transaction_amount'].fillna(df['transaction_amount'].median())
     df['balance_before'] = df['balance_before'].fillna(df['balance_before'].median())
     df['balance_after'] = df['balance_after'].fillna(df['balance_after'].median())
+    
+    df['merchant_type'] = df['merchant_type'].replace(['', 'N/A', 'NULL', 'unknown', 'nan'], np.nan)
     df['merchant_type'] = df['merchant_type'].fillna('Unknown')
+    
+    df['channel'] = df['channel'].replace(['', 'N/A', 'NULL', 'unknown', 'nan'], np.nan)
     df['channel'] = df['channel'].fillna('Online')
+    
     df['user_id'] = df['user_id'].fillna('UNKNOWN')
-    df['is_fraud'] = df['is_fraud'].fillna(0)
+    df['is_fraud'] = pd.to_numeric(df['is_fraud'], errors='coerce').fillna(0)
     
     if df['transaction_date'].isna().any():
         df['transaction_date'] = df['transaction_date'].fillna(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
