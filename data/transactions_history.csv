@@ -1,0 +1,4 @@
+timestamp,user_id,amount,merchant,channel,status,fraud_prob,risk_level
+2025-12-08 16:15:42,USR001,11500.0,Electronics,Online,APPROVED_BY_USER,0.0283,MEDIUM_RISK
+2025-12-09 12:41:13,USR018,9500.0,Electronics,Online,APPROVED_BY_USER,0.0203,MEDIUM_RISK
+2025-12-09 12:41:22,USR018,500.0,Electronics,Online,APPROVED,0.0016,LOW_RISK
